@@ -6,13 +6,11 @@
 }
 
 .product-card {
-    width: 250px;
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
+    width: 48%; /* instead of 200px */
+    max-width: 250px;
+    min-width: 150px;
 }
+
 
 .product-card img {
     width: 100%;

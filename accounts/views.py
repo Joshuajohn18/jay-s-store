@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm, CustomErrorList
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
 from django.contrib.auth.decorators import login_required
-@login_required
 # Create your views here.
 def signup(request):
     template_data = {}

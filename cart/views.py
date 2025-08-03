@@ -51,7 +51,7 @@ def add_to_cart(request, id):
      cart = request.session.get('cart', {})
      cart[id] = request.POST['quantity']
      request.session['cart'] = cart
-     return redirect('home')
+     return redirect('cart.index')
 def clear(request):
   request.session['cart']= {}
   return redirect('cart.index')

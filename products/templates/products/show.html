@@ -2,33 +2,62 @@
 {% load static %}
 {% block content %}
 
+<style>
+  .card-img-top {
+    max-height: 300px;
+    object-fit: cover;
+  }
+
+  .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #28a745;
+  }
+
+  .back-link {
+    text-decoration: none;
+  }
+</style>
+
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-12 col-md-6 col-lg-4 mb-4">
       <div class="card shadow">
-        {% if product.image %}
-        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+        {% if template_data.product.image %}
+          <img src="{{ template_data.product.image.url }}" class="card-img-top rounded-top" alt="{{ template_data.product.name }}">
         {% endif %}
         <div class="card-body">
-          <h3 class="card-title">{{ product.name }}</h3>
-          <p class="card-text text-success fw-bold">₦{{ product.price }}</p>
-          <p class="card-text">{{ product.description }}</p>
-          <form method="post" action="{% url 'cart.add' id=product.id %}">
+          <h3 class="card-title">{{ template_data.product.name }}</h3>
+          <p class="price">₦{{ template_data.product.price }}</p>
+          <p class="card-text">{{ template_data.product.description }}</p>
+
+          <form method="post" action="{% url 'cart.add' id=template_data.product.id %}">
             {% csrf_token %}
             <div class="input-group mb-3">
               <span class="input-group-text">Qty</span>
               <input
                 type="number"
+                name="quantity"
+                class="form-control"
+                value="1"
                 min="1"
                 max="10"
-                class="form-control"
-                name="quantity"
-                value="1"
+                required
               />
-              <button class="btn btn-dark" type="submit">Add to Cart</button>
+              <button type="submit" class="btn btn-dark">Add to Cart</button>
             </div>
           </form>
-          <a href="{% url 'products' %}" class="btn btn-outline-secondary mt-2">← Back to Products</a>
+
+          <a href="{% url 'products' %}" class="btn btn-outline-secondary mt-2 back-link">← Back to Products</a>
         </div>
       </div>
     </div>
